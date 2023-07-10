@@ -1,0 +1,35 @@
+<!-- <div>
+  <div *ngIf="weatherData">
+    <h2>City : {{ weatherData.name }}</h2>
+    <p>Temp: {{ weatherData.main.temp }}</p>
+    <p>Feels Like: {{ weatherData.main.feels_like }}</p>
+    <p>Visibility: {{ weatherData.visibility }}</p>
+  </div>
+</div> -->
+
+<!-- <div>
+  <form (ngSubmit)="onSubmit()">
+    <input type="text" name="query" [(ngModel)]="query" />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</div> -->
+
+<!-- <li>
+  <button mat-button [matMenuTriggerFor]="menu">Cities</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="emitEvent('delhi')">Delhi</button>
+    <button mat-menu-item (click)="emitEvent('mumbai')">Mumbai</button>
+    <button mat-menu-item (click)="emitEvent('pune')">Pune</button>
+    <button mat-menu-item (click)="emitEvent('bangalore')">Bengaluru</button>
+  </mat-menu>
+</li> -->
+
+<div>
+  <div *ngIf="weatherData">
+    <h2>City:{{ weatherData.city.name }}</h2>
+    <h2>Date: {{ weatherData.list[0].dt_txt.slice(0, 10) }}</h2>
+    <p>Temp: {{ weatherData.list[0].main.temp }}</p>
+    <p>Feels Like: {{ weatherData.list[0].main.feels_like }}</p>
+    <p>Humidity: {{ weatherData.list[0].main.humidity }}</p>
+  </div>
+</div>
