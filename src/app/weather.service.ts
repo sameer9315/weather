@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { weatherData } from './Used/weather/weather.model';
 import { environment } from 'src/environments/environment.prod';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +13,51 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(query: string) {
-    return this.http.get(environment.apiUrl, {
-      params: new HttpParams()
-        .set('q', query)
-        .set('appid', environment.apiKey)
-        .set('units', 'metric'),
-    });
+    const data = {
+      city: query,
+      apiKey: environment.apiKey,
+    };
+
+    return this.http.post(environment.apiUrl, data).pipe(
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
+  }
+
+  // getWeather(query: string) {
+  //   const queryParams = {
+  //     city: query,
+  //   };
+
+  //   return this.http
+  //     .get(environment.apiUrl, {
+  //       params: new HttpParams()
+  //         .set('q', query)
+  //         .set('appid', environment.apiKey)
+  //         .set('units', 'metric'),
+  //     })
+  //     .pipe(
+  //       catchError((error) => {
+  //         return throwError(error);
+  //       })
+  //     );
+  // }
+
+  makeCityRequest() {
+    return this.http.get(environment.cityUrl);
+    // console.log(data);
+    // console.log('city');
+    // return data;
   }
 }
+
+// makeCityRequest() {
+//   return this.http.post(environment.cityUrl, environment.body, {
+//     headers: new HttpHeaders().set('Content-Type', 'application/json'),
+//   });
+// }
+
 //`${environment.apiUrl}?q=${query}&appid=${environment.apiKey}&units=metric`
 // {
 //   // headers: new HttpHeaders()

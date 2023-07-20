@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+}
+
+.clickable {
+  /* Add your regular styles for the clickable element */
+}
+
+.clickable:hover {
+  /* Add the styles for the hover effect */
+  /* Example: change the background color */
+  /* background-color: #f0f0f0; */
+  /* Example: change the cursor */
+  cursor: pointer;
+}

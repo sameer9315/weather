@@ -13,23 +13,99 @@
               >5 Day Forecast</a
             >
           </li>
+
           <li>
-            <button mat-button [matMenuTriggerFor]="menu">Cities</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="emitEvent('delhi')">Delhi</button>
-              <button mat-menu-item (click)="emitEvent('mumbai')">
-                Mumbai
-              </button>
-              <button mat-menu-item (click)="emitEvent('pune')">Pune</button>
-              <button mat-menu-item (click)="emitEvent('bangalore')">
-                Bengaluru
-              </button>
-            </mat-menu>
+            <!-- <mat-form-field>
+              <input
+                matInput
+                [formControl]="searchControl"
+                placeholder="Search"
+              />
+              <mat-autocomplete (optionSelected)="emitEvent($event)">
+                <mat-option *ngFor="let option of cityData" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="toggleDropdown()"
+            >
+              Cities
+            </button> -->
+            <button
+              mat-raised-button
+              class="button-mat"
+              color="primary"
+              (click)="toggleDropdown()"
+            >
+              Cities
+            </button>
+
+            <mat-select
+              *ngIf="showDropdown"
+              (selectionChange)="emitEvent($event)"
+            >
+              <mat-option
+                *ngFor="let option of cityData"
+                [value]="option"
+                class="custom-option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-select (selectionChange)="emitEvent($event)">
+              <mat-option *ngFor="let option of cityData" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select> -->
+
+            <!-- <mat-form-field>
+              <input
+                type="text"
+                matInput
+                [formControl]="searchControl"
+                placeholder="Search"
+              />
+            </mat-form-field>
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              (optionSelected)="emitEvent($event)"
+            > -->
+            <!-- <mat-option *ngFor="let option of cityData" [value]="option">
+                {{ option }}
+              </mat-option> -->
+            <!-- </mat-autocomplete> -->
+            <!-- </mat-menu> -->
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </div>
+
+<!-- <button mat-button [matMenuTriggerFor]="menu">Cities</button>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                *ngFor="let option of cityData"
+                [value]="option"
+              >
+                {{ option }} (onclick)="emitEvent(option.value)">{{ option }}
+              </button> -->
+
+<!-- <button mat-button [matMenuTriggerFor]="menu">Cities</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="emitEvent('delhi')">Delhi</button>
+  <button mat-menu-item (click)="emitEvent('mumbai')">
+    Mumbai
+  </button>
+  <button mat-menu-item (click)="emitEvent('pune')">Pune</button>
+  <button mat-menu-item (click)="emitEvent('bangalore')">
+    Bengaluru
+  </button>
+</mat-menu> -->
 
 <router-outlet></router-outlet>

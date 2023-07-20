@@ -24,12 +24,48 @@
   </mat-menu>
 </li> -->
 
-<div>
-  <div *ngIf="weatherData">
+<!-- <div *ngIf="isLoading">
+  Loading.... -->
+<!-- <div *ngIf="errorMessage; else data">{{ errorMessage }}</div> -->
+<!-- <div *ngIf="!errorMessage">
+    <ng-container *ngTemplateOutlet="data"></ng-container>
+  </div> -->
+
+<!-- <div *ngIf="!errorMessage">
     <h2>City:{{ weatherData.city.name }}</h2>
     <h2>Date: {{ weatherData.list[0].dt_txt.slice(0, 10) }}</h2>
     <p>Temp: {{ weatherData.list[0].main.temp }}</p>
     <p>Feels Like: {{ weatherData.list[0].main.feels_like }}</p>
     <p>Humidity: {{ weatherData.list[0].main.humidity }}</p>
-  </div>
+  </div> -->
+
+<!-- <div *ngIf="weatherData">
+    <h2>City:{{ weatherData.city.name }}</h2>
+    <h2>Date: {{ weatherData.list[0].dt_txt.slice(0, 10) }}</h2>
+    <p>Temp: {{ weatherData.list[0].main.temp }}</p>
+    <p>Feels Like: {{ weatherData.list[0].main.feels_like }}</p>
+    <p>Humidity: {{ weatherData.list[0].main.humidity }}</p>
+  </div> -->
+<!-- </div> -->
+
+<!-- <ng-template #data>
+  <h2>City:{{ weatherData.city.name }}</h2>
+  <h2>Date: {{ weatherData.list[0].dt_txt.slice(0, 10) }}</h2>
+  <p>Temp: {{ weatherData.list[0].main.temp }}</p>
+  <p>Feels Like: {{ weatherData.list[0].main.feels_like }}</p>
+  <p>Humidity: {{ weatherData.list[0].main.humidity }}</p>
+</ng-template> -->
+
+<div>
+  <div *ngIf="isLoading; else error">Loading Wait.....</div>
+  <ng-template #error>
+    <div *ngIf="errorMessage; else data">{{ errorMessage }}</div>
+    <ng-template #data>
+      <h2>City:{{ weatherData.city.name }}</h2>
+      <h2>Date: {{ weatherData.list[0].dt_txt.slice(0, 10) }}</h2>
+      <p>Temp: {{ weatherData.list[0].main.temp }}</p>
+      <p>Feels Like: {{ weatherData.list[0].main.feels_like }}</p>
+      <p>Humidity: {{ weatherData.list[0].main.humidity }}</p>
+    </ng-template>
+  </ng-template>
 </div>

@@ -1,14 +1,51 @@
-<!-- <p>forecast works!</p> -->
+<!-- <p>forecast works!</p> ; else data -->
 
 <div>
-  <h1>City: {{ forcastData.city.name }}</h1>
-  <!-- <h2>{{ forcastData.list[0].dt_txt.slice(0, 10) }}</h2> -->
+  <div *ngIf="isLoading; else error">Loading Wait.....</div>
+  <ng-template #error>
+    <div *ngIf="errorMessage; else data">{{ errorMessage }}</div>
+    <ng-template #data>
+      <h1>City: {{ forcastData.city.name }}</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temp</th>
+            <th>Feels Like</th>
+            <th>Humidity</th>
+            <th>Weather</th>
+            <th>Weather Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let date of usedData; let i = index">
+            <th class="clickable" (click)="particularDate(i)">
+              {{ date.dt_txt.slice(0, 10) }}
+            </th>
+            <td>{{ date.main.temp }}</td>
+            <td>{{ date.main.feels_like }}</td>
+            <td>{{ date.main.humidity }}</td>
+            <td>{{ date.weather[0].main }}</td>
+            <td>{{ date.weather[0].description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </ng-template>
+</div>
 
-  <table class="table">
+<!-- <div>
+  <div *ngIf="errorMessage; else data">{{ errorMessage }}</div>
+
+  <ng-template #data> -->
+<!-- <h1>No Data Available.....</h1> -->
+
+<!-- <h1>City: {{ forcastData.city.name }}</h1> -->
+<!-- <table class="table">
     <thead>
       <tr>
         <th scope="col">Description</th>
-        <th scope="col">{{ forcastData.list[0].dt_txt.slice(0, 10) }}</th>
+        <th scope="col">{{ usedData[0].dt_txt.slice(0, 10) }}</th>
         <th scope="col">{{ getData(0) }}</th>
         <th scope="col">{{ getData(1) }}</th>
         <th scope="col">{{ getData(2) }}</th>
@@ -18,7 +55,7 @@
     <tbody>
       <tr>
         <th scope="row">Temp</th>
-        <td>{{ forcastData.list[0].main.temp }}</td>
+        <td>{{ usedData[0].main.temp }}</td>
         <td>{{ getTemp(0) }}</td>
         <td>{{ getTemp(1) }}</td>
         <td>{{ getTemp(2) }}</td>
@@ -26,7 +63,7 @@
       </tr>
       <tr>
         <th scope="row">Feels Like</th>
-        <td>{{ forcastData.list[0].main.feels_like }}</td>
+        <td>{{ usedData[0].main.feels_like }}</td>
         <td>{{ getFeelslike(0) }}</td>
         <td>{{ getFeelslike(1) }}</td>
         <td>{{ getFeelslike(2) }}</td>
@@ -34,7 +71,7 @@
       </tr>
       <tr>
         <th scope="row">Humidity</th>
-        <td>{{ forcastData.list[0].main.humidity }}</td>
+        <td>{{ usedData[0].main.humidity }}</td>
         <td>{{ getHumidity(0) }}</td>
         <td>{{ getHumidity(1) }}</td>
         <td>{{ getHumidity(2) }}</td>
@@ -42,20 +79,46 @@
       </tr>
       <tr>
         <th scope="row">Min. Temp.</th>
-        <td>{{ forcastData.list[0].main.temp_min }}</td>
-        <td>{{ getminTemp(0) }}</td>
-        <td>{{ getminTemp(1) }}</td>
-        <td>{{ getminTemp(2) }}</td>
-        <td>{{ getminTemp(3) }}</td>
+        <td>{{ usedData[0].main.temp_min }}</td>
+        <td>{{ getmaxTemp(0, "min") }}</td>
+        <td>{{ getmaxTemp(1, "min") }}</td>
+        <td>{{ getmaxTemp(2, "min") }}</td>
+        <td>{{ getmaxTemp(3, "min") }}</td>
       </tr>
       <tr>
         <th scope="row">Max. Temp.</th>
-        <td>{{ forcastData.list[0].main.temp_max }}</td>
-        <td>{{ getmaxTemp(0) }}</td>
-        <td>{{ getmaxTemp(1) }}</td>
-        <td>{{ getmaxTemp(2) }}</td>
-        <td>{{ getmaxTemp(3) }}</td>
+        <td>{{ usedData[0].main.temp_max }}</td>
+        <td>{{ getmaxTemp(0, "max") }}</td>
+        <td>{{ getmaxTemp(1, "max") }}</td>
+        <td>{{ getmaxTemp(2, "max") }}</td>
+        <td>{{ getmaxTemp(3, "max") }}</td>
       </tr>
     </tbody>
-  </table>
-</div>
+  </table> *ngIf="forcastData; else error-->
+
+<!-- <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Temp</th>
+          <th>Feels Like</th>
+          <th>Humidity</th>
+          <th>Weather</th>
+          <th>Weather Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let date of usedData; let i = index">
+          <th class="clickable" (click)="particularDate(i)">
+            {{ date.dt_txt.slice(0, 10) }}
+          </th>
+          <td>{{ date.main.temp }}</td>
+          <td>{{ date.main.feels_like }}</td>
+          <td>{{ date.main.humidity }}</td>
+          <td>{{ date.weather[0].main }}</td>
+          <td>{{ date.weather[0].description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div> -->

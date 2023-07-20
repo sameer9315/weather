@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/weather.service';
-
+// import { cityAll } from './city.model';
 import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css'],
+  template: ``,
 })
 export class WeatherComponent implements OnInit {
   query: string = 'delhi';
   weatherData: any;
-  fiind: boolean = true;
+  isLoading = false;
+  errorMessage: string = '';
 
   constructor(private weather: WeatherService, private shared: SharedService) {}
   ngOnInit(): void {
     this.query = this.shared.getmessage();
     this.getWeather(this.query);
-    console.log(this.query);
+
+    this.shared.trigger$.subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
+  // console.log(this.query);
   // emitEvent(query: string) {
   //   this.shared.setmessage(query);
   //   // this.weather.onSubmit();
@@ -42,12 +48,19 @@ export class WeatherComponent implements OnInit {
   // }
 
   private getWeather(query: string) {
-    this.weather.getWeather(this.query).subscribe({
-      next: (data) => {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.weather.getWeather(this.query).subscribe(
+      (data) => {
         this.weatherData = data;
+        this.isLoading = false;
         this.shared.setmessage(query);
-        console.log(this.weatherData);
+        // console.log(this.weatherData);
       },
-    });
+      (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'No Data Available...';
+      }
+    );
   }
 }

@@ -1,0 +1,31 @@
+<div class="mat-dialog-container">
+  <h1>City: {{ data.city.charAt(0).toUpperCase() + data.city.slice(1) }}</h1>
+  <h2>Date: {{ data.date }}</h2>
+  <h3>Min. Temp: {{ particularDateData.minTemp }}</h3>
+  <h3>Max. Temp: {{ particularDateData.maxTemp }}</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Temp</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Weather</th>
+        <th>Weather Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let date of particularDateData.data">
+        <th>
+          {{ date.dt_txt.substring(11) }}
+        </th>
+        <td>{{ date.main.temp }}</td>
+        <td>{{ date.main.feels_like }}</td>
+        <td>{{ date.main.humidity }}</td>
+        <td>{{ date.weather[0].main }}</td>
+        <td>{{ date.weather[0].description }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
